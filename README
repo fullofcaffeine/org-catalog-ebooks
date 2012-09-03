@@ -5,3 +5,5 @@ Why? Because when buying/downloading PDF material, I'd often put them somewhere 
 It uses an external Ruby script to build the file list, and relisp for elisp<->ruby communication. Relisp is awesome!
 
 I'll generalize and make it easier to use / install when I have some more free time. For now, use it at your own risk.
+
+The same solution could have been done in a number of ways, including in pure elisp or with elisp + a shell script. However, relisp does the datatype conversion automatically, and this is a big plus.
