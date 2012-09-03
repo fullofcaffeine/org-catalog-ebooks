@@ -2,21 +2,35 @@ require 'fileutils'
 require 'pathname'
 require 'debugger'
 
-ARCHIVE_BOOKS_DIR = "/Users/fullofcaffeine/archive_books"
-DESTINATION_DIR   = "/Volumes/LaCie/Learning/Books"
 
+#TODO Recursive file globbing
+#TODO Elisp, check if entry already exists
+#TODO Specific format in the name of the file, as in <title (tags)>.pdf
+#TODO Reindex
+
+ARCHIVE_BOOKS_DIR = "/Users/fullofcaffeine/archive_books"
+DESTINATION_DIR   = "/Volumes/LaCie/ebooks"
+
+catalog = true if ARGV[0] == 'catalog'
 
 unless Dir.exists?(DESTINATION_DIR)
   puts 'Error: Connect your HD'
   return
 end
 
-files_moved = []
+list_of_files = []
 
-Dir.glob(File.join(ARCHIVE_BOOKS_DIR,"*")) do |file|
+orig_dir,dest_dir = (if !catalog
+                       [ARCHIVE_BOOKS_DIR,DESTINATIOR_DIR]
+                      else
+                       [DESTINATION_DIR,DESTINATION_DIR]
+                     end)
+  
+
+Dir.glob(File.join(orig_dir,"*"),File::FNM_DOTMATCH) do |file|
  filename = Pathname.new(file).basename
- FileUtils.mv(file,File.join(DESTINATION_DIR,filename))
- files_moved << {:file => filename.to_s, :path => file}
+ FileUtils.mv(file,File.join(DESTINATION_DIR,filename)) if !catalog
+ list_of_files << {:file => filename.to_s, :path => File.join(dest_dir,filename)}
 end
 
 
@@ -28,8 +42,8 @@ end
                #{:file => 'temp.pdf',:path => "/Volumes/LaCiE/Learning/Books/temp.pdf"},
                #{:file => 'temp.pdf',:path => "/Volumes/LaCiE/Learning/Books/temp.pdfr"}]
 
-puts files_moved.to_s
-
+               puts list_of_files.length
+puts list_of_files.to_s
 
 
 
