@@ -1,0 +1,10 @@
+The goal is to move pdf files from a specific directory to another one (in my case, my external HDD)
+and then catalog then in a specific org file, with tags and a link to the file location (and some tags).
+
+Why? Because when buying/downloading PDF material, I'd often put them somewhere and just forget where they were. Also
+searching for files is a pain, specially if they are in an external media. Using org files added to the org Agenda as an
+indexing tool makes a lot of sense to me :)
+
+It uses an external Ruby script to build the file list, and relisp for elisp<->ruby communication. Relisp is awesome!
+
+I'll generalize and make it easier to use / install when I have some more free time. For now, use it at your own risk.
