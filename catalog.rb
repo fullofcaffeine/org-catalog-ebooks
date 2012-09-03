@@ -21,14 +21,13 @@ end
 list_of_files = []
 
 orig_dir,dest_dir = (if !catalog
-                       [ARCHIVE_BOOKS_DIR,DESTINATIOR_DIR]
+                       [ARCHIVE_BOOKS_DIR,DESTINATION_DIR]
                       else
                        [DESTINATION_DIR,DESTINATION_DIR]
                      end)
   
 
-                     debugger
-Dir.glob(File.join(orig_dir,"*"),File::FNM_DOTMATCH) do |file|
+Dir.glob(File.join(orig_dir,"*")) do |file|
  filename = Pathname.new(file).basename
  FileUtils.mv(file,File.join(DESTINATION_DIR,filename)) if !catalog
  list_of_files << {:file => filename.to_s, :path => File.join(dest_dir,filename)}
@@ -43,7 +42,6 @@ end
                #{:file => 'temp.pdf',:path => "/Volumes/LaCiE/Learning/Books/temp.pdf"},
                #{:file => 'temp.pdf',:path => "/Volumes/LaCiE/Learning/Books/temp.pdfr"}]
 
-               puts list_of_files.length
 puts list_of_files.to_s
 
 
