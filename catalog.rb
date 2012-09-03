@@ -27,6 +27,7 @@ orig_dir,dest_dir = (if !catalog
                      end)
   
 
+                     debugger
 Dir.glob(File.join(orig_dir,"*"),File::FNM_DOTMATCH) do |file|
  filename = Pathname.new(file).basename
  FileUtils.mv(file,File.join(DESTINATION_DIR,filename)) if !catalog
